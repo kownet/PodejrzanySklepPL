@@ -25,7 +25,7 @@ namespace Pspl.Agent.Services
             _appConfigProvider = appConfigProvider;
         }
 
-        public async Task<int> Fetch()
+        public async Task<int> RunJob()
         {
             try
             {
@@ -35,12 +35,13 @@ namespace Pspl.Agent.Services
 
                 await _scheduler.Start();
 
-                IJobDetail job = JobBuilder.Create<FetcherJob>()
-                    .WithIdentity("FetcherJob")
+                IJobDetail job = JobBuilder.Create<PsplJob>()
+                    .WithIdentity("PsplJob")
                     .Build();
 
                 var builder = TriggerBuilder.Create()
-                  .WithIdentity("FetcherJobTrigger")
+                  .WithIdentity("PsplJobTrigger")
+                  .UsingJobData("UrlToFetch", _appConfigProvider.Url())
                   .StartNow();
 
                 if (_appConfigProvider.Loop())

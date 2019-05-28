@@ -30,7 +30,8 @@ namespace Pspl.Agent.DI
             services.AddTransient<IAgentConfigProvider>(
             s => new AgentConfigProvider(
                 configurationRoot["app:loop"],
-                configurationRoot["app:timethreshold"])
+                configurationRoot["app:timethreshold"],
+                configurationRoot["app:url"])
             );
             #endregion
 

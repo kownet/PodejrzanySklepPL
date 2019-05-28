@@ -25,7 +25,7 @@ namespace Pspl.Agent
 
             var servicesProvider = DependencyProvider.Get(configuration, appId);
 
-            await servicesProvider.GetRequiredService<FetcherService>().Fetch();
+            await servicesProvider.GetRequiredService<FetcherService>().RunJob();
 
             NLog.LogManager.Shutdown();
 
