@@ -23,8 +23,19 @@
             _url = url;
         }
 
-        public int TimeThreshold() => int.Parse(_timeThreshold);
-        public bool Loop() => bool.Parse(_loop);
-        public string Url() => _url.ToLowerInvariant();
+        public int TimeThreshold()
+            => string.IsNullOrWhiteSpace(_timeThreshold)
+            ? int.Parse(_timeThreshold)
+            : 60;
+
+        public bool Loop()
+            => string.IsNullOrWhiteSpace(_loop)
+            ? bool.Parse(_loop)
+            : true;
+
+        public string Url()
+            => string.IsNullOrWhiteSpace(_url)
+            ? _url.ToLowerInvariant()
+            : string.Empty;
     }
 }

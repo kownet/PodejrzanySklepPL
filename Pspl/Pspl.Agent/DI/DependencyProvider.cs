@@ -35,6 +35,17 @@ namespace Pspl.Agent.DI
             );
             #endregion
 
+            #region Storage
+            services.AddTransient<IMongoDbProvider>(
+            s => new MongoDbProvider(
+                configurationRoot["storages:database"],
+                configurationRoot["storages:host"],
+                configurationRoot["storages:port"],
+                configurationRoot["storages:user"],
+                configurationRoot["storages:password"])
+            );
+            #endregion
+
             services.AddTransient<FetcherService>();
 
             var serviceProvider = services.BuildServiceProvider();

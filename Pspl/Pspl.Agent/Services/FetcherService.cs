@@ -13,16 +13,19 @@ namespace Pspl.Agent.Services
         private readonly ILogger<FetcherService> _logger;
 
         private readonly IAgentConfigProvider _appConfigProvider;
+        private readonly IMongoDbProvider _mongoDbProvider;
 
         private static ISchedulerFactory _schedulerFactory;
         private static IScheduler _scheduler;
 
         public FetcherService(
             ILogger<FetcherService> logger,
-            IAgentConfigProvider appConfigProvider)
+            IAgentConfigProvider appConfigProvider,
+            IMongoDbProvider mongoDbProvider)
         {
             _logger = logger;
             _appConfigProvider = appConfigProvider;
+            _mongoDbProvider = mongoDbProvider;
         }
 
         public async Task<int> RunJob()
