@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Pspl.Shared.Models;
+using Pspl.Shared.Providers;
 
 namespace Pspl.Shared.Db
 {
@@ -11,13 +12,17 @@ namespace Pspl.Shared.Db
     public class AdContext : IAdContext
     {
         private readonly IMongoDatabase _db;
+        private readonly IMongoDbProvider _mongoDbProvider;
 
-        public AdContext(MongoDBConfig config)
+        public AdContext(IMongoDbProvider mongoDbProvider)
         {
-            var client = new MongoClient(config.ConnectionString);
+            _mongoDbProvider = mongoDbProvider;
 
-            _db = client.GetDatabase(config.Database);
+            var client = new MongoClient(_mongoDbProvider.ConnectionString());
+
+            _db = client.GetDatabase(_mongoDbProvider.Database());
         }
+
         public IMongoCollection<Ad> Ads => _db.GetCollection<Ad>("Ads");
     }
 }

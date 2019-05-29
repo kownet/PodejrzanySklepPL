@@ -1,4 +1,5 @@
-﻿using Pspl.Shared.Db;
+﻿using MongoDB.Driver;
+using Pspl.Shared.Db;
 using Pspl.Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Pspl.Shared.Repositories
     {
         Task<IEnumerable<Ad>> FindByAsync(Expression<Func<Ad, bool>> predicate);
         Task<IEnumerable<Ad>> GetAllAsync();
-        Task<int> CreateAsync(Ad ad);
+        Task CreateAsync(Ad ad);
     }
 
     public class AdRepository : IAdRepository
@@ -23,19 +24,27 @@ namespace Pspl.Shared.Repositories
             _context = context;
         }
 
-        public Task<int> CreateAsync(Ad ad)
+        public async Task CreateAsync(Ad ad)
         {
-            throw new NotImplementedException();
+            await _context
+                    .Ads
+                    .InsertOneAsync(ad);
         }
 
-        public Task<IEnumerable<Ad>> FindByAsync(Expression<Func<Ad, bool>> predicate)
+        public async Task<IEnumerable<Ad>> FindByAsync(Expression<Func<Ad, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _context
+                            .Ads
+                            .Find(predicate)
+                            .ToListAsync();
         }
 
-        public Task<IEnumerable<Ad>> GetAllAsync()
+        public async Task<IEnumerable<Ad>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context
+                            .Ads
+                            .Find(_ => true)
+                            .ToListAsync();
         }
     }
 }

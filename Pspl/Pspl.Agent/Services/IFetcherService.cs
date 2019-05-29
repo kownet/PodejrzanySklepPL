@@ -9,13 +9,18 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Pspl.Agent.Core
+namespace Pspl.Agent.Services
 {
-    public class Fetcher
+    public interface IFetcherService
+    {
+        Task<IEnumerable<Ad>> Fetch(string url);
+    }
+
+    public class FetcherService : IFetcherService
     {
         private static readonly Logger Logger = LogManager.GetLogger("PSPL");
 
-        public static async Task<IEnumerable<Ad>> Fetch(string url)
+        public async Task<IEnumerable<Ad>> Fetch(string url)
         {
             var result = new List<Ad>();
 

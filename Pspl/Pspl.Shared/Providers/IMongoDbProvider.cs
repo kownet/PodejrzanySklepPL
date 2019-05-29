@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Net;
 
 namespace Pspl.Shared.Providers
 {
@@ -38,17 +36,17 @@ namespace Pspl.Shared.Providers
         }
 
         public string Database()
-            => string.IsNullOrWhiteSpace(_database)
+            => !string.IsNullOrWhiteSpace(_database)
             ? _database.ToLowerInvariant()
             : string.Empty;
 
         public string Host()
-            => string.IsNullOrWhiteSpace(_host)
+            => !string.IsNullOrWhiteSpace(_host)
             ? _host.ToLowerInvariant()
             : string.Empty;
 
         public int Port()
-            => string.IsNullOrWhiteSpace(_port)
+            => !string.IsNullOrWhiteSpace(_port)
             ? int.Parse(_port)
             : 80;
 
@@ -58,13 +56,13 @@ namespace Pspl.Shared.Providers
             : string.Empty;
 
         public string Password()
-            => string.IsNullOrWhiteSpace(_password)
+            => !string.IsNullOrWhiteSpace(_password)
             ? _password.ToLowerInvariant()
             : string.Empty;
 
         public string ConnectionString()
-            => (string.IsNullOrWhiteSpace(User()) || string.IsNullOrWhiteSpace(Password()))
-                    ? $@"mongodb://{Host()}:{Port()}"
-                    : $@"mongodb://{User()}:{Password()}@{Host()}:{Port()}";
+            => (string.IsNullOrWhiteSpace(_user) || string.IsNullOrWhiteSpace(_password))
+                    ? $@"mongodb+srv://{_host}"
+                    : $@"mongodb+srv://{_user}:{WebUtility.UrlEncode(_password)}@{_host}";
     }
 }
