@@ -7,9 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.4" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.7" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.8.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.5.0" />
     <PackageReference Include="Quartz" Version="3.0.7" />
     <PackageReference Include="ScrapySharp" Version="3.0.0" />

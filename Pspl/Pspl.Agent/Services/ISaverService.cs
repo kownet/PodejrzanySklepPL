@@ -7,7 +7,9 @@ namespace Pspl.Agent.Services
 {
     public interface ISaverService
     {
-        Task Save(IEnumerable<Ad> ads);
+        Task SaveAll(IEnumerable<Ad> ads);
+        Task<IEnumerable<Ad>> GetAllAsync();
+        Task ClearAll(IEnumerable<Ad> ads);
     }
 
     public class SaverService : ISaverService
@@ -19,7 +21,18 @@ namespace Pspl.Agent.Services
             _adRepository = adRepository;
         }
 
-        public async Task Save(IEnumerable<Ad> ads)
+        public async Task ClearAll(IEnumerable<Ad> ads)
+        {
+            foreach (var ad in ads)
+            {
+                await _adRepository.Delete(ad.Name);
+            }
+        }
+
+        public async Task<IEnumerable<Ad>> GetAllAsync()
+            => await _adRepository.GetAllAsync();
+
+        public async Task SaveAll(IEnumerable<Ad> ads)
         {
             foreach (var ad in ads)
             {

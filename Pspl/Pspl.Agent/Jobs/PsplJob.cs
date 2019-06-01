@@ -1,6 +1,7 @@
 ﻿using Pspl.Agent.Services;
 using Pspl.Shared.Extensions;
 using Quartz;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pspl.Agent.Jobs
@@ -27,11 +28,18 @@ namespace Pspl.Agent.Jobs
 
             string url = dataMap.GetString("UrlToFetch");
 
-            var fakesShops = await _fetcher.Fetch(url);
+            var newFakesShops = await _fetcher.Fetch(url);
 
-            if (fakesShops.AnyAndNotNull())
+            var oldFakesShops = await _saver.GetAllAsync();
+
+            var newestFrom = newFakesShops
+                            .Where(p => oldFakesShops
+                            .All(p2 => p2.Name != p.Name))
+                            .ToList();
+
+            if (newestFrom.AnyAndNotNull())
             {
-                await _saver.Save(fakesShops);
+                await _saver.SaveAll(newestFrom);
             }
         }
     }

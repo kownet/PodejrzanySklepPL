@@ -13,6 +13,7 @@ namespace Pspl.Shared.Repositories
         Task<IEnumerable<Ad>> FindByAsync(Expression<Func<Ad, bool>> predicate);
         Task<IEnumerable<Ad>> GetAllAsync();
         Task CreateAsync(Ad ad);
+        Task<bool> Delete(string name);
     }
 
     public class AdRepository : IAdRepository
@@ -29,6 +30,17 @@ namespace Pspl.Shared.Repositories
             await _context
                     .Ads
                     .InsertOneAsync(ad);
+        }
+
+        public async Task<bool> Delete(string name)
+        {
+            FilterDefinition<Ad> filter = Builders<Ad>.Filter.Eq(m => m.Name, name);
+            DeleteResult deleteResult = await _context
+                                                .Ads
+                                                .DeleteOneAsync(filter);
+
+            return deleteResult.IsAcknowledged
+                && deleteResult.DeletedCount > 0;
         }
 
         public async Task<IEnumerable<Ad>> FindByAsync(Expression<Func<Ad, bool>> predicate)
