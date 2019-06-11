@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pspl.Shared", "Pspl.Shared\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pspl.Api", "Pspl.Api\Pspl.Api.csproj", "{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pspl.Web", "Pspl.Web\Pspl.Web.csproj", "{4795CCEA-164B-4998-8A69-675DD45CD282}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4795CCEA-164B-4998-8A69-675DD45CD282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4795CCEA-164B-4998-8A69-675DD45CD282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4795CCEA-164B-4998-8A69-675DD45CD282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4795CCEA-164B-4998-8A69-675DD45CD282}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
