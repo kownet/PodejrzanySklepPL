@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pspl.Agent", "Pspl.Agent\Pspl.Agent.csproj", "{9DB2FD1B-6A8C-4752-B745-D23C340D979F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pspl.Agent", "Pspl.Agent\Pspl.Agent.csproj", "{9DB2FD1B-6A8C-4752-B745-D23C340D979F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pspl.Shared", "Pspl.Shared\Pspl.Shared.csproj", "{833DDF6C-D811-4E4D-950D-2739ABE94E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pspl.Shared", "Pspl.Shared\Pspl.Shared.csproj", "{833DDF6C-D811-4E4D-950D-2739ABE94E1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pspl.Api", "Pspl.Api\Pspl.Api.csproj", "{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{833DDF6C-D811-4E4D-950D-2739ABE94E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{833DDF6C-D811-4E4D-950D-2739ABE94E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{833DDF6C-D811-4E4D-950D-2739ABE94E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B96AC2ED-4617-4AD8-83AB-6F1446DA4CC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
