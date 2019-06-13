@@ -1,10 +1,15 @@
 ﻿@page
 @model IndexModel
 
-<h1 class="cover-heading">Wprowadź adres sklepu:</h1>
-<p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+<h1 class="cover-heading">Wprowadź adres sklepu</h1>
 <p class="lead">
-    <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+    Nasz serwis szybko zweryfikuje czy sklep ten nie znajduje się na liście sklepów, na które warto uważać.
+</p>
+<p class="lead">
+    <input type="url" class="form-control" id="store-to-check" placeholder="Adres sklepu"/>
+</p>
+<p class="lead">
+    <a href="#" class="btn btn-lg btn-primary" id="btn-check">Sprawdź</a>
 </p>
 
 @section Scripts{
@@ -12,7 +17,9 @@
     <script type="text/javascript">
 
         APP.home.checkStore({
-            url: 'hello'
+            btn: '#btn-check',
+            cnt: '#store-to-check',
+            url: 'https://api.podejrzanysklep.pl/ad/info'
         });
 
     </script>

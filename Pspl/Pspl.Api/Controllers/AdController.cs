@@ -32,7 +32,7 @@ namespace Pspl.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("info")]
+        [HttpPost("info")]
         public async Task<IActionResult> GetInfo(InfoRequest infoRequest)
         {
             var logMsg = $"Request for: {infoRequest.Url}";
@@ -61,13 +61,14 @@ namespace Pspl.Api.Controllers
                 {
                     return Ok(new AdResponse
                     {
+                        IsSuspicious = true,
                         Url = result.Url,
                         Description = result.Description,
                         Name = result.Name
                     });
                 }
                 else
-                    return Ok(new EmptyResponse { Message = "No result" });
+                    return Ok(new EmptyResponse { IsSuspicious = false, Message = "No result" });
             }
             catch (Exception ex)
             {
