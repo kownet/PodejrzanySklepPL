@@ -2,7 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="description" content="Upewnij się czy sklep w którym chcesz zrobić zakupy nie jest podejrzany.">
+    <meta name="author" content="Tomasz Kowalczyk - https://kownet.info">
+    <meta name="keywords" content="ecommerce, sklep, sklep internetowy, sklep online, bezpieczny sklep">
+
     <title>PodejrzanySklep.pl</title>
 
     <environment include="Development">
@@ -65,7 +72,10 @@
                     integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
             </script>
         </environment>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script>
+            var APP = {};
+        </script>
+        <script src="~/js/home.js" asp-append-version="true"></script>
     </div>
     @RenderSection("Scripts", required: false)
 </body>
