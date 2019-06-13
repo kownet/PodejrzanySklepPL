@@ -59,7 +59,7 @@ namespace Pspl.Agent
                 if (app.Loop)
                 {
                     builder.WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(app.TimeThreshold)
+                        .WithIntervalInMinutes(app.TimeThreshold)
                         .RepeatForever());
                 }
 
@@ -71,9 +71,9 @@ namespace Pspl.Agent
 
                 Console.ReadKey();
             }
-            catch (SchedulerException e)
+            catch (SchedulerException)
             {
-                //_logger.LogInformation(e.Message.ToString());
+                
             }
 
             NLog.LogManager.Shutdown();

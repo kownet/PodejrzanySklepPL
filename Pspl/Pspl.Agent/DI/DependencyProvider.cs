@@ -5,6 +5,7 @@ using NLog.Extensions.Logging;
 using Pspl.Agent.Jobs;
 using Pspl.Agent.Services;
 using Pspl.Shared.Db;
+using Pspl.Shared.Notifications;
 using Pspl.Shared.Providers;
 using Pspl.Shared.Repositories;
 using System;
@@ -27,6 +28,17 @@ namespace Pspl.Agent.DI
                     CaptureMessageProperties = true
                 });
             });
+            #endregion
+
+            #region Notifications
+            services.AddTransient<IPushOverProvider>(
+                s => new PushOverProvider(
+                    configurationRoot["notifications:pushover:token"],
+                    configurationRoot["notifications:pushover:recipients"],
+                    configurationRoot["notifications:pushover:endpoint"])
+                );
+
+            services.AddTransient<IPushOverNotification, PushOverNotification>();
             #endregion
 
             #region Storage

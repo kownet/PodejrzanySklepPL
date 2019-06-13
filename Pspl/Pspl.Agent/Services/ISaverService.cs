@@ -10,6 +10,7 @@ namespace Pspl.Agent.Services
         Task SaveAll(IEnumerable<Ad> ads);
         Task<IEnumerable<Ad>> GetAllAsync();
         Task ClearAll(IEnumerable<Ad> ads);
+        Task DeleteAll();
     }
 
     public class SaverService : ISaverService
@@ -25,8 +26,13 @@ namespace Pspl.Agent.Services
         {
             foreach (var ad in ads)
             {
-                await _adRepository.Delete(ad.Name);
+                await _adRepository.DeleteAsync(ad.Name);
             }
+        }
+
+        public async Task DeleteAll()
+        {
+            await _adRepository.DeleteAllAsync();
         }
 
         public async Task<IEnumerable<Ad>> GetAllAsync()
