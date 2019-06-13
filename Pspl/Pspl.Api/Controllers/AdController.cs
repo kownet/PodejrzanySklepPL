@@ -4,7 +4,9 @@ using Microsoft.Extensions.Logging;
 using Pspl.Api.Requests;
 using Pspl.Api.Responses;
 using Pspl.Shared.Extensions;
+using Pspl.Shared.Notifications;
 using Pspl.Shared.Repositories;
+using Pspl.Shared.Utils;
 using System;
 using System.Linq;
 using System.Net;
@@ -21,7 +23,9 @@ namespace Pspl.Api.Controllers
 
         public AdController(
             ILogger<AdController> logger,
-            IAdRepository adRepository)
+            IAdRepository adRepository,
+            IPushOverNotification pushOverNotification)
+            : base(pushOverNotification)
         {
             _logger = logger;
             _adRepository = adRepository;
@@ -31,12 +35,27 @@ namespace Pspl.Api.Controllers
         [HttpGet("info")]
         public async Task<IActionResult> GetInfo(InfoRequest infoRequest)
         {
+            var logMsg = $"Request for: {infoRequest.Url}";
+
             try
             {
-                _logger.LogInformation($"Request for: {infoRequest.Url}");
+                _logger.LogInformation(logMsg);
 
                 var result = (await _adRepository.FindByAsync(a => a.Url == infoRequest.Url))
                     .FirstOrDefault();
+
+                try
+                {
+                    var msg = (result is null) ? " not found" : " found";
+
+                    logMsg = logMsg + msg;
+
+                    PushOver.Send(Statics.ApiBaner, logMsg);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.GetFullMessage());
+                }
 
                 if (!(result is null))
                 {

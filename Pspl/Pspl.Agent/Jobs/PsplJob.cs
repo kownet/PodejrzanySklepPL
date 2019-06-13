@@ -58,7 +58,7 @@ namespace Pspl.Agent.Jobs
 
                     Logger.Info(msg);
 
-                    _pushOverNotification.Send($"[{Statics.AppName}]", msg);
+                    _pushOverNotification.Send($"{Statics.AgentBaner}", msg);
                 }
                 catch (Exception ex)
                 {

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pspl.Api.Settings;
 using Pspl.Shared.Db;
+using Pspl.Shared.Notifications;
 using Pspl.Shared.Providers;
 using Pspl.Shared.Repositories;
 
@@ -29,11 +30,23 @@ namespace Pspl.Api
                 opt.AutomaticAuthentication = false;
             });
 
+            #region Notifications
             var notifySettingsSection = Configuration.GetSection("NotificationSettings");
             services.Configure<NotificationSettings>(notifySettingsSection);
 
             var notifySettings = notifySettingsSection.Get<NotificationSettings>();
 
+            services.AddTransient<IPushOverProvider>(
+                s => new PushOverProvider(
+                    notifySettings.Token,
+                    notifySettings.Recipients,
+                    notifySettings.Endpoint)
+                );
+
+            services.AddTransient<IPushOverNotification, PushOverNotification>();
+            #endregion
+
+            #region Storages
             var mongoDbSettingsSection = Configuration.GetSection("MongoDbSettings");
             services.Configure<MongoDbSettings>(mongoDbSettingsSection);
 
@@ -51,6 +64,7 @@ namespace Pspl.Api
             services.AddTransient<IAdContext, AdContext>();
 
             services.AddTransient<IAdRepository, AdRepository>();
+            #endregion
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
