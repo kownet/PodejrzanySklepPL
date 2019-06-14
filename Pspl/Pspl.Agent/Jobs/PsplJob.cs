@@ -65,8 +65,10 @@ namespace Pspl.Agent.Jobs
                     Logger.Error(ex);
                 }
             }
-
-            Logger.Info("Nothing new found");
+            else
+            {
+                Logger.Info("Nothing new found");
+            }
         }
     }
 }
