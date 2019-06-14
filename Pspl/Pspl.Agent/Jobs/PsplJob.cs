@@ -48,8 +48,6 @@ namespace Pspl.Agent.Jobs
 
             if (newestFrom.AnyAndNotNull())
             {
-                await _saver.DeleteAll();
-
                 await _saver.SaveAll(newestFrom);
 
                 try
