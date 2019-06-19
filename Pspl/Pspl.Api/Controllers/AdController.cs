@@ -41,7 +41,19 @@ namespace Pspl.Api.Controllers
             {
                 _logger.LogInformation(logMsg);
 
-                var result = (await _adRepository.FindByAsync(a => a.Url == infoRequest.Url))
+                var name = infoRequest
+                    .Url
+                    .ToLowerInvariant()
+                    .Replace("https://", string.Empty)
+                    .Replace("http://", string.Empty)
+                    .Replace("www.", string.Empty);
+
+                if (name.Substring(name.Length - 1, 1) == "/")
+                {
+                    name = name.Remove(name.Length - 1, 1);
+                }
+
+                var result = (await _adRepository.FindByAsync(a => a.Name == name))
                     .FirstOrDefault();
 
                 try
@@ -63,7 +75,7 @@ namespace Pspl.Api.Controllers
                     {
                         IsSuspicious = true,
                         Url = result.Url,
-                        Description = result.Description,
+                        Description = result.Description.StripTagsRegexCompiled(),
                         Name = result.Name
                     });
                 }

@@ -22,7 +22,7 @@
                     success: function (data) {
 
                         if (data.isSuspicious) {
-                            swal("Uwaga", "Sklep jest podejrzany", "warning");
+                            swal("Uwaga", data.description, "warning");
                         }
                         else {
                             swal("OK", "Tego sklepu nie ma na liście podejrzanych", "success");
