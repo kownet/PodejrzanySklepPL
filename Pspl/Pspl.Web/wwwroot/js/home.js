@@ -2,6 +2,8 @@
 
     var checkStore = function (opts) {
 
+        $(opts.spinner).hide();
+
         $(document).on('click', opts.btn, function () {
 
             var url = $(opts.cnt).val();
@@ -11,6 +13,8 @@
                 swal("Błąd", "Podaj adres sklepu do sprawdzenia", "error");
 
             } else {
+
+                $(opts.spinner).show();
 
                 var params = JSON.stringify({ url: url });
 
@@ -28,6 +32,10 @@
                             swal("OK", "Tego sklepu nie ma na liście podejrzanych", "success");
                         }
                     }
+                }).done(function () {
+
+                    $(opts.spinner).hide();
+
                 });
 
             }
