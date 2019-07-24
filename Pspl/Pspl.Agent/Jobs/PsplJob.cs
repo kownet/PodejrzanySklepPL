@@ -52,7 +52,9 @@ namespace Pspl.Agent.Jobs
 
                 try
                 {
-                    var msg = $"Added: {newestFrom.Count()}, Old: {oldFakesShops.Count()}, New: {newFakesShops.Count()}";
+                    var newFakeShopsLabel = string.Join(",", newestFrom.Select(s => s.Url));
+
+                    var msg = $"Added: {newFakeShopsLabel}. All: {newFakesShops.Count()}";
 
                     Logger.Info(msg);
 
