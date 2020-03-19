@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using NLog;
+using Pspl.Shared.Extensions;
 using Pspl.Shared.Models;
 using ScrapySharp.Extensions;
 using System;
@@ -47,7 +48,9 @@ namespace Pspl.Agent.Services
                                 var newAd = new Ad
                                 {
                                     Name = name.InnerText.Trim().ToLowerInvariant(),
-                                    Url = address.InnerText.Trim().ToLowerInvariant()
+                                    Url = address.InnerText.Trim().ToLowerInvariant(),
+                                    IsPublished = false,
+                                    DateScrapped = DateTimeExt.GetNowFromEpoch()
                                 };
 
                                 if (!(desc is null))

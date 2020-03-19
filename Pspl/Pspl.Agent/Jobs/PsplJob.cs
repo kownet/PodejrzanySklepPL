@@ -43,7 +43,7 @@ namespace Pspl.Agent.Jobs
 
             var newestFrom = newFakesShops
                             .Where(p => oldFakesShops
-                            .All(p2 => p2.Name != p.Name))
+                            .All(p2 => p2.Url != p.Url))
                             .ToList();
 
             if (newestFrom.AnyAndNotNull())
